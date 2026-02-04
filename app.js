@@ -181,6 +181,9 @@ const endMessage = document.getElementById("endMessage");
 const rankText = document.getElementById("rankText");
 const nextWaveBtn = document.getElementById("nextWaveBtn");
 const restartBtn = document.getElementById("restartBtn");
+const fakeCursor = document.getElementById("fakeCursor");
+const desktop = document.getElementById("desktop");
+const workspace = document.getElementById("workspace");
 
 const emailContent = document.getElementById("emailContent");
 const filesContent = document.getElementById("filesContent");
@@ -189,6 +192,8 @@ const browserContent = document.getElementById("browserContent");
 const openButtons = document.querySelectorAll("[data-open]");
 const windows = document.querySelectorAll(".window");
 const difficultyButtons = document.querySelectorAll(".difficulty__btn");
+let topZ = 5;
+let activeDrag = null;
 
 const randomIndex = (max) => Math.floor(Math.random() * max);
 
@@ -244,6 +249,12 @@ function openWindow(id) {
   if (!target) return;
   target.classList.add("is-open");
   target.setAttribute("aria-hidden", "false");
+  bringToFront(target);
+}
+
+function bringToFront(windowEl) {
+  topZ += 1;
+  windowEl.style.zIndex = topZ;
 }
 
 function startWave() {
@@ -386,6 +397,48 @@ securityActions.addEventListener("click", (event) => {
 
 nextWaveBtn.addEventListener("click", nextWave);
 restartBtn.addEventListener("click", resetGame);
+
+windows.forEach((windowEl) => {
+  const header = windowEl.querySelector(".window__header");
+  header.addEventListener("pointerdown", (event) => {
+    if (window.matchMedia("(max-width: 900px)").matches) return;
+    activeDrag = {
+      element: windowEl,
+      offsetX: event.clientX - windowEl.offsetLeft,
+      offsetY: event.clientY - windowEl.offsetTop
+    };
+    bringToFront(windowEl);
+    header.setPointerCapture(event.pointerId);
+  });
+});
+
+document.addEventListener("pointermove", (event) => {
+  if (event.pointerType === "mouse") {
+    fakeCursor.classList.add("is-visible");
+    fakeCursor.style.left = `${event.clientX}px`;
+    fakeCursor.style.top = `${event.clientY}px`;
+  }
+  if (!activeDrag) return;
+  const bounds = workspace.getBoundingClientRect();
+  const newLeft = Math.min(
+    Math.max(event.clientX - activeDrag.offsetX, 0),
+    bounds.width - activeDrag.element.offsetWidth
+  );
+  const newTop = Math.min(
+    Math.max(event.clientY - activeDrag.offsetY - bounds.top, 0),
+    bounds.height - activeDrag.element.offsetHeight
+  );
+  activeDrag.element.style.left = `${newLeft}px`;
+  activeDrag.element.style.top = `${newTop}px`;
+});
+
+document.addEventListener("pointerup", () => {
+  activeDrag = null;
+});
+
+desktop.addEventListener("pointerleave", () => {
+  fakeCursor.classList.remove("is-visible");
+});
 
 renderActions();
 updateHud();
