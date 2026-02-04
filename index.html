@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infected: OS Under Attack</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="desktop">
+    <header class="hud">
+      <div class="hud__item">
+        <span class="hud__label">System Health</span>
+        <div class="health-bar">
+          <div class="health-bar__fill" id="healthFill"></div>
+        </div>
+        <span class="hud__value" id="healthValue">100</span>
+      </div>
+      <div class="hud__item">
+        <span class="hud__label">Security Score</span>
+        <span class="hud__value" id="scoreValue">0</span>
+      </div>
+      <div class="hud__item">
+        <span class="hud__label">Wave</span>
+        <span class="hud__value" id="waveValue">1/6</span>
+      </div>
+      <div class="hud__item">
+        <span class="hud__label">Difficulty</span>
+        <div class="difficulty">
+          <button class="difficulty__btn is-active" data-difficulty="easy">Easy</button>
+          <button class="difficulty__btn" data-difficulty="standard">Standard</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="icons">
+        <button class="icon" data-open="emailWindow">
+          <span class="icon__graphic">✉️</span>
+          <span>Email</span>
+        </button>
+        <button class="icon" data-open="filesWindow">
+          <span class="icon__graphic">📁</span>
+          <span>Files</span>
+        </button>
+        <button class="icon" data-open="browserWindow">
+          <span class="icon__graphic">🌐</span>
+          <span>Browser</span>
+        </button>
+        <button class="icon" data-open="settingsWindow">
+          <span class="icon__graphic">⚙️</span>
+          <span>Settings</span>
+        </button>
+        <button class="icon" data-open="securityWindow">
+          <span class="icon__graphic">🛡️</span>
+          <span>Security Centre</span>
+        </button>
+      </section>
+
+      <section class="windows">
+        <div class="window" id="emailWindow" aria-hidden="true">
+          <div class="window__header">Northfield Mail</div>
+          <div class="window__content" id="emailContent">
+            <p>No new messages.</p>
+          </div>
+        </div>
+        <div class="window" id="filesWindow" aria-hidden="true">
+          <div class="window__header">File Explorer</div>
+          <div class="window__content" id="filesContent">
+            <p>Documents look normal.</p>
+          </div>
+        </div>
+        <div class="window" id="browserWindow" aria-hidden="true">
+          <div class="window__header">Northfield Browser</div>
+          <div class="window__content" id="browserContent">
+            <p>Homepage loaded. Stay alert for suspicious redirects.</p>
+          </div>
+        </div>
+        <div class="window" id="settingsWindow" aria-hidden="true">
+          <div class="window__header">System Settings</div>
+          <div class="window__content">
+            <p>OS version 9.4.2</p>
+            <ul>
+              <li>Updates: Auto-check enabled</li>
+              <li>Firewall: Active</li>
+              <li>Backups: Weekly schedule</li>
+            </ul>
+          </div>
+        </div>
+        <div class="window" id="securityWindow" aria-hidden="true">
+          <div class="window__header">Security Centre</div>
+          <div class="window__content">
+            <p class="security-intro">Pick the best defence for the current threat.</p>
+            <div class="security-actions" id="securityActions"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="notifications" id="notifications"></aside>
+    </main>
+
+    <footer class="taskbar">
+      <div class="taskbar__left">
+        <button class="start-btn">Start</button>
+        <span class="taskbar__app">Infected: OS Under Attack</span>
+      </div>
+      <div class="taskbar__right">
+        <span class="taskbar__status" id="statusText">System stable</span>
+        <span class="taskbar__clock" id="clock"></span>
+      </div>
+    </footer>
+  </div>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay__panel" id="overlayContent"></div>
+  </div>
+
+  <div class="modal" id="feedbackModal" aria-hidden="true">
+    <div class="modal__card">
+      <h2>Wave Report</h2>
+      <div id="feedbackContent"></div>
+      <button class="primary-btn" id="nextWaveBtn">Next Wave</button>
+    </div>
+  </div>
+
+  <div class="modal" id="endModal" aria-hidden="true">
+    <div class="modal__card">
+      <h2 id="endTitle">System Secured</h2>
+      <p id="endMessage"></p>
+      <p class="rank" id="rankText"></p>
+      <button class="primary-btn" id="restartBtn">Restart Simulation</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+:root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #f4f6fb;
+  background-color: #0c111b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1c3555 0%, #0b121c 55%, #06090f 100%);
+}
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: linear-gradient(120deg, rgba(20, 70, 120, 0.6), rgba(12, 20, 35, 0.8));
+}
+
+.hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(8, 12, 20, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+}
+
+.hud__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.hud__value {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.health-bar {
+  width: 140px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.health-bar__fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #3ef08c, #00c5ff);
+  transition: width 0.3s ease;
+}
+
+.difficulty {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.difficulty__btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #f4f6fb;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.difficulty__btn.is-active {
+  background: #1f89ff;
+  border-color: transparent;
+}
+
+.workspace {
+  flex: 1;
+  position: relative;
+  display: flex;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.icons {
+  display: grid;
+  gap: 1rem;
+  width: 140px;
+}
+
+.icon {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #f4f6fb;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.icon__graphic {
+  font-size: 1.5rem;
+}
+
+.windows {
+  flex: 1;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.window {
+  background: rgba(20, 26, 40, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  min-height: 180px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.window.is-open {
+  display: flex;
+}
+
+.window__header {
+  padding: 0.6rem 0.9rem;
+  background: rgba(255, 255, 255, 0.07);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.window__content {
+  padding: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.security-actions {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f4f6fb;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.65rem;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.action-btn:hover {
+  border-color: #1f89ff;
+  background: rgba(31, 137, 255, 0.2);
+}
+
+.notifications {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 5rem;
+  display: grid;
+  gap: 0.5rem;
+  width: 260px;
+}
+
+.toast {
+  background: rgba(18, 28, 45, 0.95);
+  border-left: 4px solid #1f89ff;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+.taskbar {
+  height: 48px;
+  background: rgba(6, 10, 18, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.start-btn {
+  background: #1f89ff;
+  border: none;
+  color: #fff;
+  padding: 0.35rem 0.85rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.taskbar__left,
+.taskbar__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.taskbar__clock {
+  font-variant-numeric: tabular-nums;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 15, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  z-index: 5;
+}
+
+.overlay.is-active {
+  display: flex;
+}
+
+.overlay__panel {
+  background: rgba(13, 22, 35, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 520px;
+  text-align: center;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 12, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  z-index: 6;
+}
+
+.modal.is-active {
+  display: flex;
+}
+
+.modal__card {
+  background: rgba(18, 28, 45, 0.95);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: min(560px, 92vw);
+  text-align: left;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.modal__card h2 {
+  margin-top: 0;
+}
+
+.primary-btn {
+  margin-top: 1.25rem;
+  background: #1f89ff;
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rank {
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
+
+.ransom-note {
+  background: rgba(120, 20, 20, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  color: #fff;
+}
+
+.ransom-timer {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.75rem 0;
+}
+
+.ad-pop {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    flex-direction: column;
+  }
+
+  .icons {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    width: 100%;
+  }
+
+  .notifications {
+    position: static;
+    width: 100%;
+  }
+}
